@@ -1,0 +1,14 @@
+# 1. Ignore everything recursively
+/*
+
+# 2. Allow the .gitignore file itself
+!.gitignore
+
+# 3. Allow the README.md file in the root
+!/README.md
+
+# 4. Allow the src directory itself
+!/src/
+
+# 5. Do not ignore anything inside the src directory
+!/src/**
