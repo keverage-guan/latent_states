@@ -255,7 +255,17 @@ def main():
     hmm_labels = dec["state_seq"].astype(int)
     window_ids = dec["window_ids"].astype(int)
     N = len(hmm_labels)
-    k = int(dec["k"]) if "k" in dec else int(hmm_labels.max() + 1)
+    k_nominal = int(dec["k"]) if "k" in dec else int(hmm_labels.max() + 1)
+
+    visited_states = np.unique(hmm_labels)
+    k_eff = len(visited_states)
+    if k_eff != k_nominal:
+        print(f"NOTE: decode declares k={k_nominal} states, but only "
+              f"{k_eff} are visited in state_seq ({sorted(visited_states.tolist())}). "
+              f"Using k_eff={k_eff} for both segmentations.")
+        remap = {old: new for new, old in enumerate(visited_states)}
+        hmm_labels = np.array([remap[s] for s in hmm_labels], dtype=int)
+    k = k_eff
 
     f1_data = np.load(args.f1_npz, allow_pickle=True)
     f1_matrix = f1_data["f1_matrix_colcentered"].astype(float)
