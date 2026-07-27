@@ -78,6 +78,7 @@ def _save_and_plot(
     # picture. A positive entry then means "this train window does better than
     # the average train window does on this particular test window."
     # nanmean over axis=0 ignores missing (NaN) rows.
+    np.fill_diagonal(f1_matrix, np.nan) 
     col_means = np.nanmean(f1_matrix, axis=0, keepdims=True)   # (1, n_valid)
     f1_matrix_colcentered = f1_matrix - col_means
 

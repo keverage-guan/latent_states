@@ -37,7 +37,7 @@ Usage
     # Fakeddit, k=5:
     python -m src.eval.within_across_states --dataset fakeddit --k 11
 
-    # Yelp, k=18, explicit paths:
+    # Yelp, k=16, explicit paths:
     python -m src.eval.within_across_states --dataset yelp --k 16 \
         --decode_npz data/hmm_hmm/yelp/yelp_decode_k16.npz \
         --f1_npz     data/hmm_perf/yelp/cross_window_f1_colcentered.npz \
