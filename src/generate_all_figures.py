@@ -1407,8 +1407,8 @@ def figure_equal_segmentation(k, eq_dir, k_out, dpi):
             null_diffs   = np.load(null_path)
             hmm_row      = summary[summary["method"] == "HMM"].iloc[0]
             eq_row       = summary[summary["method"] == "equal_duration"].iloc[0]
-            obs_diff     = float(hmm_row["gap"]) - float(eq_row["gap"])
             p_direct_row = summary[summary["method"].str.startswith("HMM_minus")].iloc[0]
+            obs_diff     = float(p_direct_row["gap"])
             p_direct     = float(p_direct_row["direct_perm_p"])
 
             fig, ax = plt.subplots(figsize=(6, 4))
